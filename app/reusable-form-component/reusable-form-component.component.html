@@ -1,0 +1,32 @@
+<ng-container *ngIf="getFormControl === 'INPUT'">
+	
+	<mat-form-field>
+		<input (change)='valueChanged(this)' [(ngModel)]='val' matInput placeholder="{{ setFormControlPLaceholder }}" value="{{ setFormControlValue }}" />
+	</mat-form-field>
+</ng-container>
+
+<ng-container *ngIf="getFormControl === 'SELECT_BOX'">
+	<mat-form-field>
+		<mat-label>Select an option</mat-label>
+		<mat-select (selectionChange)='valueChanged(this)' [(ngModel)]='val'>
+			<mat-option *ngFor="let option of setFormControlOptions" [value]="option">{{ option }}</mat-option>
+		</mat-select> 
+	</mat-form-field>
+</ng-container>
+
+<ng-container *ngIf="getFormControl === 'RADIO_BTN'">
+	<div class="mat-form-field-infix">
+		<mat-radio-group (change)='valueChanged(this)' [(ngModel)]='val' aria-label="Select an option">
+			<mat-radio-button *ngFor="let option of setFormControlOptions" [value]="option">{{ option }}</mat-radio-button>
+		</mat-radio-group>
+		<mat-slide-toggle>Slide me!</mat-slide-toggle>
+	</div>
+</ng-container>
+
+<ng-container *ngIf="getFormControl === 'CHECK_BOX'">
+	<div class="mat-form-field-infix">
+		<section (change)='valueChanged(this)' [(ngModel)]='val' class="example-section">
+			<mat-checkbox class="example-margin" *ngFor="let option of setFormControlOptions">{{ option }}</mat-checkbox>
+		</section>
+	</div>
+</ng-container>

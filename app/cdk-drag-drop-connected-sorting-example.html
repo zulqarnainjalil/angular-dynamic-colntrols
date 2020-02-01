@@ -1,0 +1,35 @@
+<div class="page-wrapper">
+	<div class="row" cdkDropListGroup>
+		<div class="column">
+			<div class="form-contol-tool-column">
+				Form elements
+
+				<div cdkDropList [cdkDropListData]="formElements" class="example-list" (cdkDropListDropped)="drop($event)">
+					<div cdkDrag *ngFor="let el of formElements">
+					
+          
+							{{ el }}
+              
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="double-column">
+			<div class="questionaire-column">
+				Form
+				<div class="example-container">
+					<div cdkDropList [cdkDropListData]="questionnaire" class="example-list" (cdkDropListDropped)="drop($event)">
+						<div class="form-control-selected-tool" *ngFor="let item of questionnaire" cdkDrag>
+							<app-reusable-form-component (valueChange)='displayCounter($event)'
+                [index]="index"
+								[getFormControl]="item"
+								[formControlOptions]="formControlOptions"
+							></app-reusable-form-component>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+</div>
