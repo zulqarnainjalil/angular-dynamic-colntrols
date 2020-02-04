@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output,AfterViewInit} from '@angular/core';
 
 @Component({
   selector: 'app-reusable-form-component',
   templateUrl: './reusable-form-component.component.html',
   styleUrls: ['./reusable-form-component.component.css']
 })
-export class ReusableFormComponentComponent implements OnInit {
+export class ReusableFormComponentComponent implements OnInit,AfterViewInit {
 	@Input() getFormControl: any;
 	@Input() formControlOptions: any[];
 	setFormControlValue: any;
@@ -15,6 +15,27 @@ export class ReusableFormComponentComponent implements OnInit {
 @Output() valueChange = new EventEmitter();
 @Input() index:any;
 val:any;
+ngAfterViewInit(){
+    debugger
+    if (this.getFormControl == "INPUT")
+      this.valueChange.emit({
+        index: this.index,
+        type: "INPUT",
+        value: this.val
+      });
+    else if (this.getFormControl == "SELECT_BOX") {
+      this.valueChange.emit({
+        index: this.index,
+        type: "SELECT_BOX",
+        selectedValue: this.val,
+        avaliableOptions: [
+          "select option 1",
+          "select option 2",
+          "select option 3"
+        ]
+      });
+    }
+  }
 	ngOnInit() {
 		for (let v of this.formControlOptions) {
 			if (v.inputType == this.getFormControl) {
